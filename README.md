@@ -40,6 +40,63 @@ Die benötigten Pakete sind:
 python setup.py install
 ```
 
+## .exe erstellen (Windows Release)
+
+Um PingMaster als ausführbare .exe-Datei für Windows zu erstellen, verwenden Sie PyInstaller:
+
+### PyInstaller installieren
+
+```bash
+pip install pyinstaller
+```
+
+### .exe erstellen
+
+**Einfache .exe (mit Konsole):**
+
+```bash
+pyinstaller --onefile network_monitor.py --name PingMaster
+```
+
+**.exe ohne Konsole (im Hintergrund):**
+
+```bash
+pyinstaller --onefile --noconsole network_monitor.py --name PingMaster
+```
+
+**.exe mit Icon und ohne Konsole:**
+
+```bash
+pyinstaller --onefile --noconsole --icon=icon.ico network_monitor.py --name PingMaster
+```
+
+**Erweiterte .exe mit allen Abhängigkeiten:**
+
+```bash
+pyinstaller --onefile --noconsole --add-data "config.ini;." --add-data "screenshot.png;." network_monitor.py --name PingMaster
+```
+
+### Build-Skript verwenden
+
+Alternativ können Sie das bereitgestellte Build-Skript verwenden:
+
+```bash
+python build.py
+```
+
+Dies erstellt eine optimierte .exe im `dist/` Ordner.
+
+### Release vorbereiten
+
+Nach dem Build:
+
+1. Die .exe aus `dist/` Ordner kopieren
+2. `config.ini` und `screenshot.png` mit in das Release-Verzeichnis kopieren
+3. Optional: Eine README.txt mit Installationsanweisungen hinzufügen
+4. Alles in eine .zip-Datei packen
+
+**Hinweis**: Die .exe enthält alle Python-Abhängigkeiten und kann ohne Python-Installation auf Windows ausgeführt werden.
+
 ## Verwendung
 
 ### Einfach starten
