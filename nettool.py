@@ -9,7 +9,7 @@ import time
 import socket
 import argparse, sys
 import threading
-from netifaces import interfaces, ifaddresses, AF_INET
+import psutil
 import nmap
 from subprocess import check_output
 
@@ -180,20 +180,15 @@ def portCheck(address, port):
 
 
 def getLocalIPS():
-    #ips = check_output(['hostname', '--all-ip-addresses'])
-    #ips = ""
-    #for ifaceName in interfaces():
-    #	addresses = [i['addr'] for i in ifaddresses(ifaceName).setdefault(AF_INET, [{'addr':'No IP addr'}])]
-	#addresses = [i['addr'] for i in ifaddresses(ifaceName.setdefault(AF_INET, [{'addr':'No IP addr'}])]
-    #    ips = str(ips) + " " + str(addresses)
     ips = ""
-    for ifaceName in interfaces():
-        addresses = [i['addr'] for i in ifaddresses(ifaceName).setdefault(AF_INET, [{'addr':'No IP addr'}])]
-        if "127.0.0" in str(addresses):
-            print("127 dont add")
-            print("after addr: " + str(addresses))
-        else:
-            ips = str(ips) + " " + str(addresses)
+    for ifaceName, addrs in psutil.net_if_addrs().items():
+        for addr in addrs:
+            if addr.family == socket.AF_INET:  # IPv4
+                if "127.0.0" in str(addr.address):
+                    print("127 dont add")
+                    print("after addr: " + str(addr.address))
+                else:
+                    ips = str(ips) + " " + str(addr.address)
     localIPs = re.findall(r'[0-9]+(?:\.[0-9]+){3}', str(ips))
     #print("localIPS: " + str(localIPs[0]))
     for x in range(0, len(localIPs)):

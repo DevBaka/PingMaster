@@ -21,7 +21,7 @@ setup(
     python_requires='>=3.6',
     install_requires=[
         'python-nmap>=0.7.1',
-        'netifaces>=0.11.0',
+        'psutil>=5.9.0',
         'rich>=10.0.0',
         'python-dotenv>=0.19.0',
     ],

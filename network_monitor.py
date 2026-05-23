@@ -18,7 +18,7 @@ from queue import Queue
 from threading import Thread, Event, Lock
 from typing import Dict, List, Optional, Tuple, Any, Set
 
-import netifaces
+import psutil
 import nmap
 from rich.console import Console
 from rich.live import Live
@@ -158,32 +158,26 @@ class NetworkMonitor:
         logger.debug(f"Configuration: {dict(config.config.items())}")
         
     def get_local_networks(self) -> List[str]:
-        """Get list of local networks from available interfaces."""
+        """Get list of local networks from available interfaces using psutil."""
         networks = []
         try:
-            for iface in netifaces.interfaces():
-                try:
-                    addrs = netifaces.ifaddresses(iface)
-                    if netifaces.AF_INET in addrs:
-                        for addr in addrs[netifaces.AF_INET]:
-                            try:
-                                if 'addr' in addr and 'netmask' in addr:
-                                    ip = addr['addr']
-                                    netmask = addr['netmask']
-                                    # Skip localhost and invalid addresses
-                                    if (ip != '127.0.0.1' and 
-                                        ip != '0.0.0.0' and 
-                                        not ip.startswith('169.254.') and  # Link-local
-                                        netmask != '255.255.255.255'):  # Skip point-to-point
-                                        network = self.ip_to_network(ip, netmask)
-                                        if network not in networks:  # Avoid duplicates
-                                            networks.append(network)
-                            except (KeyError, ValueError) as e:
-                                self.console.print(f"[yellow]Warning: Could not process address on {iface}: {e}[/]")
-                                continue
-                except ValueError as e:
-                    self.console.print(f"[yellow]Warning: Could not get addresses for {iface}: {e}[/]")
-                    continue
+            for iface, addrs in psutil.net_if_addrs().items():
+                for addr in addrs:
+                    if addr.family == socket.AF_INET:  # IPv4
+                        try:
+                            ip = addr.address
+                            netmask = addr.netmask
+                            # Skip localhost and invalid addresses
+                            if (ip != '127.0.0.1' and 
+                                ip != '0.0.0.0' and 
+                                not ip.startswith('169.254.') and  # Link-local
+                                netmask != '255.255.255.255'):  # Skip point-to-point
+                                network = self.ip_to_network(ip, netmask)
+                                if network not in networks:  # Avoid duplicates
+                                    networks.append(network)
+                        except (KeyError, ValueError, AttributeError) as e:
+                            self.console.print(f"[yellow]Warning: Could not process address on {iface}: {e}[/]")
+                            continue
         except Exception as e:
             self.console.print(f"[red]Error getting network interfaces: {e}[/]")
         
@@ -191,12 +185,19 @@ class NetworkMonitor:
         if not networks:
             self.console.print("[yellow]No networks found, trying fallback method...[/]")
             try:
-                # Try to get the default gateway's network
-                gateways = netifaces.gateways()
-                if 'default' in gateways and netifaces.AF_INET in gateways['default']:
-                    gateway_ip = gateways['default'][netifaces.AF_INET][0]
-                    # Assume a common subnet mask for the gateway
-                    networks.append(f"{gateway_ip.rsplit('.', 1)[0]}.0/24")
+                # Try to get the default gateway's network using psutil
+                gateways = psutil.net_if_stats()
+                for iface, stats in gateways.items():
+                    if stats.isup:
+                        # Try to get a reasonable network from the interface
+                        for addr in psutil.net_if_addrs().get(iface, []):
+                            if addr.family == socket.AF_INET and addr.address != '127.0.0.1':
+                                gateway_ip = addr.address
+                                # Assume a common subnet mask for the gateway
+                                networks.append(f"{gateway_ip.rsplit('.', 1)[0]}.0/24")
+                                break
+                        if networks:
+                            break
             except Exception as e:
                 self.console.print(f"[red]Fallback method failed: {e}[/]")
         
