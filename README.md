@@ -2,6 +2,8 @@
 
 PingMaster ist ein leistungsstarkes, plattformübergreifendes **Network Monitoring Tool** und **Ping Scanner** für die automatische Netzwerküberwachung. Mit Host-Discovery, kontinuierlichem Ping-Monitoring, Response-Time-Tracking und einem Live-Dashboard ist PingMaster die ideale Lösung für Systemadministratoren und Netzwerk-Engineers zur Überwachung von Netzwerk-Verfügbarkeit und Performance.
 
+![Screenshot](screenshot.png)
+
 ## Features
 
 - **Automatische Netzwerk-Erkennung**: Erkennt automatisch lokale Netzwerke und alle aktiven Hosts mit **Network Discovery**
