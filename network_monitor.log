@@ -18,3 +18,19 @@
 2026-05-23 09:52:02 - network_monitor - INFO - [192.168.178.27] Status changed: DOWN -> UP (Response time: 34.0ms)
 2026-05-23 09:52:02 - network_monitor - INFO - [192.168.178.29] Status changed: DOWN -> UP (Response time: 41.0ms)
 2026-05-23 09:52:02 - network_monitor - INFO - [192.168.178.32] Status changed: DOWN -> UP (Response time: 48.0ms)
+2026-05-23 09:57:38 - network_monitor - WARNING - [192.168.178.27] Status changed: UP -> DOWN
+2026-05-23 09:57:38 - network_monitor - WARNING - [192.168.178.32] Status changed: UP -> DOWN
+2026-05-23 09:57:41 - network_monitor - INFO - [192.168.178.32] Status changed: DOWN -> UP (Response time: 81.0ms)
+2026-05-23 09:57:41 - network_monitor - INFO - [192.168.178.27] Status changed: DOWN -> UP (Response time: 76.0ms)
+2026-05-23 09:59:15 - network_monitor - INFO - Network Monitor initialized
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.21] Status changed: DOWN -> UP (Response time: 1.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.1] Status changed: DOWN -> UP (Response time: 1.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.30] Status changed: DOWN -> UP (Response time: 4.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.45] Status changed: DOWN -> UP (Response time: 1.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.23] Status changed: DOWN -> UP (Response time: 3.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.31] Status changed: DOWN -> UP (Response time: 5.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.24] Status changed: DOWN -> UP (Response time: 4.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.28] Status changed: DOWN -> UP (Response time: 3.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.27] Status changed: DOWN -> UP (Response time: 46.0ms)
+2026-05-23 09:59:17 - network_monitor - INFO - [192.168.178.25] Status changed: DOWN -> UP (Response time: 45.0ms)
+2026-05-23 09:59:18 - network_monitor - INFO - [192.168.178.32] Status changed: DOWN -> UP (Response time: 101.0ms)

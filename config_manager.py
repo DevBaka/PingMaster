@@ -1,4 +1,4 @@
-"""Configuration manager for the Network Monitor."""
+"""Configuration manager for PingMaster - Network Monitoring Tool."""
 import configparser
 import os
 from pathlib import Path
@@ -23,7 +23,7 @@ class ConfigManager:
             },
             'logging': {
                 'level': 'INFO',
-                'file': 'network_monitor.log',
+                'file': 'pingmaster.log',
             },
             'alerts': {
                 'email_alerts': 'false',

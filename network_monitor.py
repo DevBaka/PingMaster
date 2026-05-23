@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Network Monitor
-A lightweight, cross-platform network monitoring tool with configuration and logging support.
+PingMaster - Network Monitoring Tool
+A powerful, cross-platform network monitoring tool with ping monitoring, host discovery, 
+configuration and logging support for network administrators.
 """
 import concurrent.futures
 import os
@@ -37,7 +38,7 @@ DEFAULT_CONFIG = {
     },
     'logging': {
         'level': 'INFO',
-        'file': 'logs/network_monitor.log',
+        'file': 'pingmaster.log',
     },
     'monitoring': {
         'ping_count': '1',
@@ -61,7 +62,7 @@ for section, options in DEFAULT_CONFIG.items():
             config.set(section, key, value)
 
 # Setup logging
-log_file = config.get('logging', 'file', fallback='network_monitor.log')
+log_file = config.get('logging', 'file', fallback='pingmaster.log')
 log_level = config.get('logging', 'level', fallback='INFO')
 logger = setup_logging(level=log_level, log_file=log_file)
 

@@ -1,18 +1,18 @@
-# Network Monitor (pingCheck)
+# PingMaster - Network Monitoring Tool
 
-Ein leichtgewichtiges, plattformübergreifendes Tool zur Netzwerküberwachung mit automatischer Host-Erkennung, Ping-Monitoring und Live-Dashboard.
+PingMaster ist ein leistungsstarkes, plattformübergreifendes **Network Monitoring Tool** und **Ping Scanner** für die automatische Netzwerküberwachung. Mit Host-Discovery, kontinuierlichem Ping-Monitoring, Response-Time-Tracking und einem Live-Dashboard ist PingMaster die ideale Lösung für Systemadministratoren und Netzwerk-Engineers zur Überwachung von Netzwerk-Verfügbarkeit und Performance.
 
 ## Features
 
-- **Automatische Netzwerk-Erkennung**: Erkennt automatisch lokale Netzwerke und alle aktiven Hosts
-- **Kontinuierliches Monitoring**: Pingt alle Hosts kontinuierlich und überwacht deren Status
-- **Performance-Metriken**: Zeigt Response Times (RTT) und Packet Loss für jeden Host
-- **Port-Scanning**: Scannt gängige Ports auf offene Verbindungen
-- **Live-Dashboard**: Schönes Terminal-UI mit Rich Library für Echtzeit-Updates
+- **Automatische Netzwerk-Erkennung**: Erkennt automatisch lokale Netzwerke und alle aktiven Hosts mit **Network Discovery**
+- **Kontinuierliches Monitoring**: Pingt alle Hosts kontinuierlich und überwacht deren Status in Echtzeit
+- **Performance-Metriken**: Zeigt Response Times (RTT), Latenz und Packet Loss für jeden Host
+- **Port-Scanning**: Scannt gängige Ports auf offene Verbindungen mit **Network Scanner**
+- **Live-Dashboard**: Schönes Terminal-UI mit Rich Library für Echtzeit-Updates und **Network Visualization**
 - **Konfigurierbar**: Alle Einstellungen können über `config.ini` angepasst werden
-- **Logging**: Protokolliert alle Statusänderungen und Ereignisse
-- **Multi-threading**: Parallele Überwachung für optimale Performance
-- **Cross-Platform**: Läuft auf Windows, Linux und macOS
+- **Logging**: Protokolliert alle Statusänderungen und Ereignisse für **Network Troubleshooting**
+- **Multi-threading**: Parallele Überwachung für optimale Performance bei **Large Network Scanning**
+- **Cross-Platform**: Läuft auf Windows, Linux und macOS als **Portable Network Tool**
 
 ## Installation
 
@@ -28,9 +28,9 @@ pip install -r requirements.txt
 ```
 
 Die benötigten Pakete sind:
-- `python-nmap>=0.7.1` - Für Nmap-Integration
-- `psutil>=5.9.0` - Für Netzwerk-Interface-Erkennung (ersetzt netifaces für bessere Kompatibilität)
-- `rich>=13.7.0` - Für das Terminal-UI
+- `python-nmap>=0.7.1` - Für Nmap-Integration und **Network Port Scanning**
+- `psutil>=5.9.0` - Für Netzwerk-Interface-Erkennung und **System Monitoring** (ersetzt netifaces für bessere Kompatibilität)
+- `rich>=13.7.0` - Für das Terminal-UI und **Console Dashboard**
 - `python-dotenv>=1.0.0` - Für Umgebungsvariablen
 - `setuptools>=65.5.0` - Für Paket-Management
 
@@ -48,11 +48,11 @@ python setup.py install
 python network_monitor.py
 ```
 
-Das Tool wird automatisch:
-1. Alle lokalen Netzwerke erkennen
-2. Alle aktiven Hosts im Netzwerk scannen
-3. Mit dem Monitoring beginnen
-4. Ein Live-Dashboard anzeigen
+PingMaster wird automatisch:
+1. Alle lokalen Netzwerke erkennen mit **Network Discovery**
+2. Alle aktiven Hosts im Netzwerk scannen mit **Host Discovery**
+3. Mit dem **Ping Monitoring** beginnen
+4. Ein Live-Dashboard für **Network Visualization** anzeigen
 
 ### Mit sudo (Linux/macOS)
 
@@ -78,7 +78,7 @@ timeout = 2                 # Ping-Timeout in Sekunden
 
 [logging]
 level = INFO               # Log-Level: DEBUG, INFO, WARNING, ERROR
-file = network_monitor.log # Log-Datei-Pfad
+file = pingmaster.log      # Log-Datei-Pfad
 
 [monitoring]
 ping_count = 1             # Anzahl der Pings pro Check
@@ -91,16 +91,16 @@ common_ports = 21,22,23,80,443,3389,5900  # Zu scannende Ports
 
 ## Dashboard
 
-Das Live-Dashboard zeigt folgende Informationen für jeden Host:
+Das PingMaster Live-Dashboard zeigt folgende Informationen für jeden Host in Echtzeit:
 
 ![Screenshot](screenshot.png)
 
 - **IP**: IP-Adresse des Hosts
-- **Hostname**: Aufgelöster Hostname (falls verfügbar)
-- **Status**: UP (grün) oder DOWN (rot)
+- **Hostname**: Aufgelöster Hostname (falls verfügbar) für **Host Identification**
+- **Status**: UP (grün) oder DOWN (rot) für **Network Availability Monitoring**
 - **Last Seen**: Zeit des letzten erfolgreichen Pings
-- **Avg. RTT**: Durchschnittliche Response-Time in Millisekunden
-- **Packet Loss %**: Prozentsatz verlorener Pakete
+- **Avg. RTT**: Durchschnittliche Response-Time in Millisekunden für **Latency Monitoring**
+- **Packet Loss %**: Prozentsatz verlorener Pakete für **Network Quality Assessment**
 
 ### Steuerung
 
@@ -110,10 +110,10 @@ Das Live-Dashboard zeigt folgende Informationen für jeden Host:
 
 ### Hauptkomponenten
 
-- **network_monitor.py**: Hauptanwendung mit Monitoring-Logik und UI
-- **nettool.py**: Legacy-Tool mit erweiterten Netzwerk-Funktionen
+- **network_monitor.py**: Hauptanwendung mit Monitoring-Logik und UI für **Network Monitoring**
+- **nettool.py**: Legacy-Tool mit erweiterten Netzwerk-Funktionen für **Network Scanning**
 - **config_manager.py**: Konfigurationsverwaltung
-- **logger.py**: Logging-System mit Host-spezifischen Loggern
+- **logger.py**: Logging-System mit Host-spezifischen Loggern für **Network Logging**
 
 ### Datenstrukturen
 
@@ -122,7 +122,7 @@ Das Live-Dashboard zeigt folgende Informationen für jeden Host:
 
 ## Legacy-Tool (nettool.py)
 
-Das Projekt enthält auch ein älteres Tool `nettool.py` mit zusätzlichen Funktionen:
+PingMaster enthält auch ein älteres Tool `nettool.py` mit zusätzlichen Funktionen für **Advanced Network Scanning**:
 
 ### Verfügbare Optionen
 
@@ -154,18 +154,18 @@ python nettool.py --sip 192.168.1.0/24 -p
 ### Keine Hosts gefunden
 
 - Stellen Sie sicher, dass Sie mit dem Netzwerk verbunden sind
-- Überprüfen Sie die Firewall-Einstellungen
-- Führen Sie das Tool als Administrator/Root aus
+- Überprüfen Sie die Firewall-Einstellungen für **Network Discovery**
+- Führen Sie das Tool als Administrator/Root aus für **Network Scanning**
 
 ### Ping schlägt fehl
 
 - Einige Firewalls blockieren ICMP-Pakete
-- Überprüfen Sie die Timeout-Einstellung in `config.ini`
+- Überprüfen Sie die Timeout-Einstellung in `config.ini` für **Ping Timeout Configuration**
 
 ### Hostname-Auflösung funktioniert nicht
 
 - Dies ist normal, wenn DNS nicht korrekt konfiguriert ist
-- Die IP-Adresse wird stattdessen angezeigt
+- Die IP-Adresse wird stattdessen für **Host Identification** angezeigt
 
 ## Lizenz
 
@@ -177,5 +177,9 @@ Beiträge sind willkommen! Fühlen Sie sich frei, Issues zu öffnen oder Pull Re
 
 ## Autor
 
-Erstellt vor 7 Jahren als persönliches Netzwerk-Monitoring-Tool.
+Erstellt vor 7 Jahren als persönliches Netzwerk-Monitoring-Tool. PingMaster ist ein Open-Source **Network Monitoring Tool** für Systemadministratoren und Netzwerk-Engineers.
+
+---
+
+**Keywords**: Network Monitoring, Ping Tool, Network Scanner, Host Discovery, Network Visualization, Latency Monitoring, Packet Loss, Network Troubleshooting, Python Network Tool, Cross-Platform Network Monitor
 
